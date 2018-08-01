@@ -1,0 +1,4 @@
+build/*.js
+config/*.js
+pwa-digitme
+node_modules
