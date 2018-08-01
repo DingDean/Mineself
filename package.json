@@ -1,0 +1,31 @@
+{
+  "name": "mineself",
+  "version": "1.0.0",
+  "description": "Mine Myself",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "DEBUG=Mineself:* node index.js",
+    "dredd": "dredd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DingDean/Mineself.git"
+  },
+  "keywords": [],
+  "author": "Ke Ding <me@dingkewz.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DingDean/Mineself/issues"
+  },
+  "homepage": "https://github.com/DingDean/Mineself#readme",
+  "devDependencies": {
+    "dredd": "^5.1.11",
+    "mocha": "^5.2.0",
+    "sinon": "^6.1.4",
+    "supertest": "^3.1.0"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
