@@ -7,6 +7,10 @@ install:
 scripts:
   - npm test
 before_install:
+  - npm install -g npm@6.1.0
   - npm install -g dredd@5.1.11
 before_script:
   - dredd
+cache:
+  directories:
+    - $(npm config get prefix)/bin/dredd
