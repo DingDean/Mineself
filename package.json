@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "DEBUG=Mineself:* node index.js",
-    "dredd": "dredd"
+    "doc": "apidoc -i ./src/ -o ./docs/"
   },
   "repository": {
     "type": "git",
@@ -20,12 +20,24 @@
   },
   "homepage": "https://github.com/DingDean/Mineself#readme",
   "devDependencies": {
+    "apidoc": "^0.17.6",
+    "babel-eslint": "^8.2.6",
+    "eslint": "^5.2.0",
     "mocha": "^5.2.0",
     "sinon": "^6.1.4",
     "supertest": "^3.1.0"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "config": "^2.0.1",
     "drafter": "^1.2.0",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "helmet": "^3.13.0",
+    "mongoose": "^5.2.6"
+  },
+  "apidoc": {
+    "title": "Mineself Api Documentation",
+    "version": "0.1.0"
   }
 }
