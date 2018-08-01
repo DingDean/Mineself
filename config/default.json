@@ -1,0 +1,8 @@
+{
+  "port": 8889,
+  "mongo": "mongodb://localhost:27017/test",
+  "routes": [{
+    "mount": "/",
+    "component": ""
+  }]
+}
