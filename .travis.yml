@@ -5,6 +5,6 @@ node_js:
 install:
   - npm ci
 scripts:
-  - npm test
+  - npm run citest
 before_install:
   - npm install -g npm@6.1.0

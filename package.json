@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha --require intelli-espower-loader -cw --recursive --check-leaks ./test",
+    "citest": "NODE_ENV=test mocha --require intelli-espower-loader --recursive --check-leaks ./test",
     "dev": "DEBUG=Mineself:* node index.js",
     "doc": "apidoc -i ./src/ -o ./docs/"
   },
