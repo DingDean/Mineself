@@ -17,6 +17,6 @@ module.exports = router
  *
  * @apiUse _AuthError
  */
-router.post('/search', (req, res) => {
+router.post('/', (req, res) => {
   res.send('save search')
 })
