@@ -1,42 +1,34 @@
-const express = require('express')
-const compression = require('compression')
-const path = require('path')
-const fs = require('fs')
-const bodyParser = require('body-parser')
-const helmet = require('helmet')
-const app = express()
-const config = require('config')
-
-/* MongoDB */
+const app = require('./src/app')
 const mongoose = require('mongoose')
-const MONGO_URL = config.get('mongo')
-mongoose.Promise = global.Promise
-mongoose.connect(MONGO_URL, {
-  keepAlive: 120
-}).then(() => {
-  console.info('connected to database')
-}).catch(err => {
-  logger.error(err)
-  throw new Error(err)
-})
 
-/* Helmet */
-app.use(helmet())
+function checkApiKey () {
+  let {JWT_SECRECT, SINGLE_TOKEN} = process.env
+  if (!JWT_SECRECT || !SINGLE_TOKEN) {
+    throw new Error('Envirionment variable JWT_SECRECT or SINGLE_TOKEN NOT FOUND!')
+  }
+}
 
-/* Setup Routes */
-app.use(compression())
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
+function connectMongo () {
+  const MONGO_URL = config.get('mongo')
+  mongoose.Promise = global.Promise
+  mongoose.connect(MONGO_URL, {
+    keepAlive: 120
+  }).then(() => {
+    console.info('connected to database')
+  }).catch(err => {
+    logger.error(err)
+    throw new Error(err)
+  })
+}
 
-const routes = config.get('routes')
-routes.forEach(({mount, component}) => {
-  app.use(
-    mount, 
-    require(`./src/routes/${component}`)
-  )
-})
+function main () {
+  checkApiKey()
+  connectMongo()
 
-const PORT = config.get('port')
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`)
-})
+  const PORT = config.get('port')
+  app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`)
+  })
+}
+
+main()
