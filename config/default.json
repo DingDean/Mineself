@@ -1,8 +1,24 @@
 {
   "port": 8889,
   "mongo": "mongodb://localhost:27017/test",
-  "routes": [{
-    "mount": "/",
-    "component": ""
-  }]
+  "jwt_secret": "",
+  "api_token": "",
+  "routes": [
+    {
+      "mount": "/auth",
+      "component": "auth"
+    }, 
+    {
+      "mount": "/editor",
+      "component": "editor"
+    }, 
+    {
+      "mount": "/pomodoro",
+      "component": "pomodoro"
+    }, 
+    {
+      "mount": "/search",
+      "component": "search"
+    }
+  ]
 }
