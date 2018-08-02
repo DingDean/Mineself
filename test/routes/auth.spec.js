@@ -21,12 +21,12 @@ describe('POST /auth', function () {
   })
 
   describe('when authenticated', function () {
-    it('should pass the jwt as access_token in cookie', function () {
+    it('should pass the jwt as access_token in cookie', function (done) {
       supertest(app)
         .post('/auth')
-        .send({apiToken: "test api key"})
-        .expect(200)
+        .send({apiToken: "test api token"})
         .expect('set-cookie', /access_token=\w+/)
+        .expect(200, done)
     })
   })
 })
