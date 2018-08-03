@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const {save, get, range} = require('../controller/pomodoro')
 const {passport} = require('../lib/auth')
+const validate = require('express-validation')
+const joi = require('joi')
 module.exports = router
 
 router.use(passport.authenticate('jwt', {session: false}))
@@ -65,7 +67,18 @@ router.get('/', get)
  *
  * @apiUse _AuthError
  */
-router.post('/', save)
+const pomoObj = joi.object({
+  start: joi.date().required(),
+  minutes: joi.number().positive().required(),
+  isComplete: joi.boolean().required(),
+  thoughts: joi.string()
+})
+const postPomoSchema = {
+  body: {
+    pomodoros: joi.array().items(pomoObj).required()
+  }
+}
+router.post('/', validate(postPomoSchema), save)
 
 /**
  * @api {get} /pomodoro/range Get pomodoro timer in a time range
