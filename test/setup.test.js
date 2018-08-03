@@ -14,6 +14,9 @@ after(function (done) {
     mongoose.connection
     .dropCollection('searches'),
   ])
-  .then(() => done())
+  .then(() => {
+    mongoose.connection.close()
+    done()
+  })
   .catch(done)
 })
