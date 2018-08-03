@@ -71,7 +71,7 @@ const pomoObj = joi.object({
   start: joi.date().required(),
   minutes: joi.number().positive().required(),
   isComplete: joi.boolean().required(),
-  thoughts: joi.string()
+  thoughts: joi.string().default('Too lazy to give a thought')
 })
 const postPomoSchema = {
   body: {
