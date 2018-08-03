@@ -1,8 +1,8 @@
 const {createLogger, format, transports} = require('winston')
-const {colorize, json, prettyPrint, combine, printf} = format
+const {colorize, splat, combine, printf} = format
 const path = require('path')
-const logFile = path.resolve('../../logs/mineself.log')
-const testLogFile = path.resolve('../../logs/test.mineself.log')
+const logFile = path.resolve(__dirname, '../../logs/mineself.log')
+const testLogFile = path.resolve(__dirname, '../../logs/test.mineself.log')
 
 const isTest = process.env.NODE_ENV === 'test'
 function genTransports () {
@@ -38,10 +38,9 @@ const {timestamp, finalFormat} = genFormats()
 const logger = createLogger({
   level: process.env.VERBOSE ? 'verbose' : 'info',
   format: combine(
+    splat(),
     colorize(),
-    json(),
     timestamp(),
-    prettyPrint(),
     finalFormat
   ),
   transports: genTransports()
