@@ -1,5 +1,5 @@
 const app = require('./src/app')
-const mongoose = require('mongoose')
+const mongo = require('./src/lib/database')
 
 function checkApiKey () {
   let {JWT_SECRECT, SINGLE_TOKEN} = process.env
@@ -8,22 +8,10 @@ function checkApiKey () {
   }
 }
 
-function connectMongo () {
-  const MONGO_URL = config.get('mongo')
-  mongoose.Promise = global.Promise
-  mongoose.connect(MONGO_URL, {
-    keepAlive: 120
-  }).then(() => {
-    console.info('connected to database')
-  }).catch(err => {
-    logger.error(err)
-    throw new Error(err)
-  })
-}
 
 function main () {
   checkApiKey()
-  connectMongo()
+  mongo.connect()
 
   const PORT = config.get('port')
   app.listen(PORT, () => {
