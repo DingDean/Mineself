@@ -1,16 +1,13 @@
-function save (req, res, next) {
+const svs = require('../services/pomodoro')
+
+async function save (req, res, next) {
   let {pomodoros} = req.body
-
-  if (!pomodoros)
-    return next({message: 'Bad Request', status: 400})
-
-  if (!Array.isArray(pomodoros))
-    return next({
-      message: 'Expect pomodoros to be array', 
-      status: 400
-    })
-
-  res.sendStatus(200)
+  try {
+    await svs.save(pomodoros)
+    res.sendStatus(200)
+  } catch (e) {
+    next(e)
+  }
 }
 
 function get (req, res) {
