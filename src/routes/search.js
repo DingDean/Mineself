@@ -1,6 +1,11 @@
+const {save} = require('../controller/search')
+const {passport} = require('../lib/auth')
 const router = require('express').Router()
+const validate = require('express-validation')
+const joi = require('joi')
 module.exports = router
 
+const schema = {}
 /**
  * @api {post} /search Save search query
  * @apiName PostSearch
@@ -17,6 +22,13 @@ module.exports = router
  *
  * @apiUse _AuthError
  */
-router.post('/', (req, res) => {
-  res.send('save search')
-})
+schema.postSearch = {
+  body: {
+    url: joi.string().required()
+  }
+}
+router.post('/', 
+  passport.authenticate('jwt', {session: false}),
+  validate(schema.postSearch),
+  save
+)
