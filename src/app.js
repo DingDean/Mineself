@@ -37,7 +37,10 @@ app.use(function (err, req, res, next) {
 
   logger.error(`[${status}]-[${method} ${originalUrl}]-[${err.message}]`)
   if (err.stack)
-    logger.error(err.stack)
+    logger.error("%o", err.stack)
+  // Joi Validation Error
+  if (err.errors)
+    logger.error("%o", err.errors)
   res.status(status).send(status === 500 ? '' : err.message)
 })
 
