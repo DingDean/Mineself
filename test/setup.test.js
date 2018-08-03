@@ -6,8 +6,14 @@ mongoose.models = {};
 mongoose.modelSchemas = {};
 
 after(function (done) {
-  mongoose.connection
-    .dropCollection('tomatoes')
-    .then(() => done())
-    .catch(done)
+  Promise.all([
+    mongoose.connection
+    .dropCollection('tomatoes'),
+    mongoose.connection
+    .dropCollection('sessions'),
+    mongoose.connection
+    .dropCollection('searches'),
+  ])
+  .then(() => done())
+  .catch(done)
 })
