@@ -1,4 +1,8 @@
+const {save} = require('../controller/editor')
+const {passport} = require('../lib/auth')
 const router = require('express').Router()
+const validate = require('express-validation')
+const joi = require('joi')
 module.exports = router
 
 /**
@@ -74,9 +78,24 @@ router.get('/sessions', (req, res) => {
  *
  * @apiUse _AuthError
  */
-router.post('/sessions', (req, res) => {
-  res.send('post sessions')
-})
+const sessionObj = {
+  filetype: joi.string().required(),
+  filename: joi.string().required(),
+  project: joi.string().default('na').optional(),
+  start: joi.date().required(),
+  end: joi.date().required(),
+  ticks: joi.number().required()
+}
+const postEditorSchema = {
+  body: {
+    sessions: joi.array().items(sessionObj).required()
+  }
+}
+router.post('/sessions', 
+  passport.authenticate('jwt', {session: false}),
+  validate(postEditorSchema),
+  save
+)
 
 /**
  * @api {get} /editor/sessions/range Get editing sessions in a range
