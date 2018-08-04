@@ -36,7 +36,7 @@ function connect () {
     logger.info('connected to database')
   }).catch(err => {
     logger.error(err)
-    throw new Error(err)
+    process.exit(1)
   })
 }
 

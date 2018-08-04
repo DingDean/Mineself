@@ -15,6 +15,8 @@ after(function (done) {
     .dropCollection('searches'),
   ])
   .then(() => {
+    // close the connect so that
+    // mocha could exit
     mongoose.connection.close()
     done()
   })
