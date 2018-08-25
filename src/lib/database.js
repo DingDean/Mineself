@@ -4,7 +4,7 @@ const logger = require('./logger')
 
 const Session = mongoose.model('Session', mongoose.Schema({
   start: {type: Date, default: Date.now},
-  duratoin: {type: Number, default: 0}, // time used in ms
+  duration: {type: Number, default: 0}, // time used in ms
   filename: String,
   filetype: String,
   ticks: Number,
