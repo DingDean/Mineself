@@ -28,3 +28,16 @@ module.exports = route
  *  }
  */
 route.post('/', login)
+
+/**
+ * @api {get} /auth Check if this is a valid auth server
+ * @apiName GetLogin
+ * @apiGroup Auth
+ *
+ * @apiSuccessExample {json} Success-Response
+ *  HTTP/1.1 200 OK
+ *
+ * @apiErrorExample {json} Error-Response
+ *  HTTP/1.1 4XX
+ */
+route.get('/', (req, res) => res.sendStatus(200))
