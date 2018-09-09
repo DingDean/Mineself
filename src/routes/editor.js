@@ -1,4 +1,4 @@
-const {save} = require('../controller/editor')
+const {save, get} = require('../controller/editor')
 const {passport} = require('../lib/auth')
 const router = require('express').Router()
 const validate = require('express-validation')
@@ -55,15 +55,29 @@ module.exports = router
  */
 
 /**
- * @api {get} /editor/sessions Get Today's Editing Sessions
+ * @api {get} /editor/sessions Get Editing Sessions In A Time Range
  * @apiName GetEditorSessions
  * @apiGroup Editor
  *
+ * @apiParam {String} [from] Date string, default to the start of the day
+ * @apiParam {String} [to] Date.string, default to new Date()
+ * @apiParamExample {String} Query-Example
+ * /pomodoro?from=2018-08-01T09:53:59.710Z&to=2018-09-01T09:53:59.710Z
+ *
  * @apiUse SessionResponse
  */
-router.get('/sessions', (req, res) => {
-  res.send('editor')
-})
+const getSessionSchema = {
+  query: {
+    from: joi.date().optional(),
+    to: joi.date().optional()
+  }
+}
+router.get('/sessions',
+  passport.authenticate('jwt', {session: false}),
+  validate(getSessionSchema),
+  get
+)
+
 
 /**
  * @api {post} /editor/sessions Save sessions
@@ -96,18 +110,3 @@ router.post('/sessions',
   validate(postEditorSchema),
   save
 )
-
-/**
- * @api {get} /editor/sessions/range Get editing sessions in a range
- * @apiName GetEditorSessionRange
- * @apiGroup Editor
- *
- * @apiUse _AuthHeader
- *
- * @apiUse SessionResponse
- *
- * @apiUse _AuthError
- */
-router.get('/sessions/range', (req, res) => {
-  res.send('sessions range')
-})

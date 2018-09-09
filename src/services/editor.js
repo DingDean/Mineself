@@ -39,3 +39,9 @@ service.save = function (sessions) {
 
   return Promise.all(docs)
 }
+
+service.get = function ({from, to}) {
+  return sessions
+    .find({start: {$lte: to, $gte: from}})
+    .exec()
+}
