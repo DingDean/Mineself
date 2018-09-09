@@ -27,3 +27,9 @@ It can answer your questions like the followings:
 
 Data collected would be processed and visualized properly through a web
  interface.
+
+# TODO
+
+- [ ] Track geographic info
+- [ ] SQL
+- [ ] GraphQL
