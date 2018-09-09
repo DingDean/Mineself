@@ -2,7 +2,7 @@ const {Tomato} = require('../lib/database')
 
 let services = module.exports = {}
 
-services.save = async function (tomatos) {
+services.save = function (tomatos) {
   let docs = tomatos.map(tomato => {
     return new Tomato(tomato)
   })
@@ -12,4 +12,10 @@ services.save = async function (tomatos) {
   })
 
   return Promise.all(ops)
+}
+
+services.get = function ({from, to}) {
+  return Tomato
+    .find({start: {$lte:to, $gte: from}})
+    .exec()
 }
