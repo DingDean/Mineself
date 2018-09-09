@@ -24,6 +24,10 @@ routes.forEach(({mount, component}) => {
   )
 })
 
+app.get('/hello', (req, res) => {
+  res.sendStatus(200)
+})
+
 /* Handle 404 */ 
 app.use(function (req, res, next) {
   let err = new Error('Not Found')
