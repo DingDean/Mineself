@@ -1,0 +1,6 @@
+{
+  "port": 8889,
+  "mongo": "mongodb://localhost:27017/test",
+  "jwt_secret": "test jwt secret",
+  "api_token": "test api token"
+}
