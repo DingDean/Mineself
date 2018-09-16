@@ -14,6 +14,10 @@ describe('getSource', function () {
     {
       url: 'https://cn.bing.com/search?q=test+query&qs=n&form=QBLHCN&sp=-1&pq=test+query&sc=6-10&sk=&cvid=1DEB2A2B57E546C18004BAE8238840C6',
       expect: 'bing'
+    },
+    {
+      url: 'https://duckduckgo.com/?q=test+query',
+      expect: 'duckduckgo'
     }
   ]
 
@@ -54,6 +58,11 @@ describe('getQuery', function () {
     {
       url: 'https://cn.bing.com/search?q=test+query&qs=n&form=QBLHCN&sp=-1&pq=test+query&sc=6-10&sk=&cvid=1DEB2A2B57E546C18004BAE8238840C6',
       source: 'bing',
+      expect: 'test+query'
+    },
+    {
+      url: 'https://duckduckgo.com/?q=test+query',
+      source: 'duckduckgo',
       expect: 'test+query'
     }
   ]

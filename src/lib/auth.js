@@ -11,7 +11,7 @@ const JWT_SECRECT = config.get('jwt_secret')
 function genJWT (payload) {
   return jwt.sign(payload, JWT_SECRECT, {
     algorithm: 'HS256',
-    expiresIn: isProduction ? '7 days' : 60,
+    expiresIn: isProduction ? '7 days' : 3600,
   })
 }
 
@@ -23,7 +23,6 @@ const JWTOptions = {
 passport.use(new Strategy(JWTOptions, function (jwt_payload, done) {
   done(null, true)
 }))
-
 
 module.exports = {
   passport,

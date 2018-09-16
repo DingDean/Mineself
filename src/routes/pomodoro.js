@@ -84,7 +84,7 @@ router.get('/',
  */
 const pomoObj = joi.object({
   start: joi.date().required(),
-  minutes: joi.number().positive().required(),
+  minutes: joi.number().min(0).required(),
   isComplete: joi.boolean().required(),
   thoughts: joi.string().default('Too lazy to give a thought')
 })

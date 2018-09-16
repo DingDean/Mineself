@@ -6,7 +6,7 @@
   "scripts": {
     "test": "NODE_ENV=test mocha --require intelli-espower-loader --recursive --check-leaks ./test",
     "localtest": "NODE_ENV=test mocha --require intelli-espower-loader -cw --recursive --check-leaks ./test",
-    "dev": "DEBUG=Mineself:* NODE_ENV=dev node index.js",
+    "dev": "DEBUG='express:*' NODE_ENV=dev node index.js",
     "doc": "apidoc -i ./src/ -o ./docs/"
   },
   "repository": {

@@ -7,7 +7,10 @@ ctl.save = async function (req, res, next) {
     await save(url)
     res.sendStatus(200)
   } catch (e) {
-    next(e)
+    return next(e)
   }
 }
 
+ctl.getRawTokens = async function (req, res, next) {
+  res.send('raw tokens')
+}
